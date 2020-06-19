@@ -3,7 +3,7 @@
 ## Exercise I
 
 a)
-O(3n - a)
+O(log n)
 
 
 b)
