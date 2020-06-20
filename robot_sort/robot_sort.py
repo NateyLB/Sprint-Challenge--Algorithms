@@ -49,8 +49,6 @@ class SortingRobot:
         else:
             return False
     
-    def take_item(self, item):
-        self._item = item
 
     def swap_item(self):
         """
@@ -96,25 +94,37 @@ class SortingRobot:
         return self._light == "ON"
 
     def sort(self):
+        '''
+        - lets grab the first item and move down the line to the right. (this makes the first place in our list empty) Grabbing items that are larger along the way.
+        This puts the largest items to the right.
+        - We then go left grabbing the any item that is smaller than what we are holding, this starts to put the smaller items in the lower spots (indexes)
+        - We do this until we do not swap anymore, then our list is sorted.
+        - One last thing. After we move left all the way (one last time), we are gaurenteed to be carrying the smallest item. We need to put this in the lowest index( the empty one we 
+        swapped with first) We are then done
+        '''
         # Fill this out
         self.swap_item()
-        self.set_light_on()
-        while self._light == "ON":
-            print(self._list)
-            self.set_light_off()
-            
-
-            while self.can_move_right() is True:
+        self.move_right()
+        self.set_light_off()
+        for x in range(len(self._list)):
+        # while self.light_is_on():
+            # self.set_light_off()
+            while self.can_move_right():
                 if self.compare_item() == -1:
+                    # self.set_light_on()
                     self.swap_item()
-                    self.set_light_on()
                 self.move_right()
 
-            while self.can_move_left() is True:
+            while self.can_move_left():
                 if self.compare_item() == 1:
+                    # self.set_light_on()
                     self.swap_item()
-                    self.set_light_on()
                 self.move_left()
+        self.swap_item()
+        
+# i was trying to use this logic of if there are swaps then there still needs to be sorting done, on the pass where there is no swaps, then the list
+# is sorted. I tried to encapsulate this logic in a while loop that breaks if the lights are off. WHen the light is on there are swaps. For some reason
+# I could not get this to work. SO    
 
 #         def bubble_sort(arr):
 # 	# it traverses the array
